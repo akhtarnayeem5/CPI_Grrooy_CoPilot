@@ -1,0 +1,29 @@
+package com.sap.gateway.ip.core.customdev.util
+
+class Message{
+    private Object body
+    private Map<String, Object> headers = new HashMap<>()
+    private Map<String, Object> properties = new HashMap<>()
+
+    Object getBody() {
+        return this.body
+    }
+    Object getBody(class type) {
+        return this.body
+    }
+    void setBody(Object body){
+        this.body = body
+    }
+    Map<String, Object> getHeaders(){
+        return this.headers
+    }
+    Map<String,Object> getProperties(){
+        return this.properties
+    }
+    void setHeader(String name, Object value){
+        this.headers.put(name,value)
+    }
+    void setProperties(String name, Object value){
+        this.properties.put(name,value)
+    }
+}
