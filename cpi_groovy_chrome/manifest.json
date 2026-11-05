@@ -1,0 +1,19 @@
+{
+    "manifest_version": 3,
+    "name": "SAP CPI Groovy Copilot",
+    "version": "1.0.0",
+    "description": "A Chrome extension that provides a copilot for SAP CPI Groovy scripts.",
+    "permissions": [
+        "activeTab",
+        "scripting",
+        "clipboardWrite"
+    ],
+    "host_permissions": [
+        "https://127.0.0.1:8000/*   ",
+        "http://localhost:8000/*"
+    ],
+    "action": {
+        "default_popup": "popup.html",
+        "default_title": "SAP CPI Groovy Copilot"
+    }
+}

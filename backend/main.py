@@ -2,6 +2,7 @@ import os
 
 
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 from pydantic import BaseModel
 from dotenv import load_dotenv
@@ -10,6 +11,13 @@ from google.genai import types
 
 load_dotenv()
 app = FastAPI(title="CPI Groovy Copilot API")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 #Initialize the Google GenAI client with the API key from environment variables
 api_key = os.getenv("GOOGLE_API_KEY")
 model_name = os.getenv("GEMINI_MODEL", "gemini-3.8-flash")
