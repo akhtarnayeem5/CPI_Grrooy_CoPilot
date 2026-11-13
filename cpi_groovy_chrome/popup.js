@@ -1,12 +1,12 @@
 let extractedGroovyCode = "";
 
 document.getElementById("generateBtn").addEventListener("click", async () => {
-const requirement = document.getElementById("requirement").value.trim();
+const prompt = document.getElementById("requirement").value.trim();
 const statusEl = document.getElementById("status");
 const outputSection = document.getElementById("outputSection");
 const codePreview = document.getElementById("codePreview");
 
-if (!requirement) {
+if (!prompt) {
     statusEl.textContent = "Please enter a requirement.";
     return;
 }
@@ -15,13 +15,17 @@ statusEl.textContent = "Generating Groovy code...";
 outputSection.style.display = "none";
 codePreview.textContent = "";
 
+const controller = new AbortController();
+const timeoutId = setTimeout(() => controller.abort(), 30000);
+
 try {
-    const response = await fetch("https://127.0.0.1:8000/api/v1/generate-groovy", {
+    const response = await fetch("http://127.0.0.1:8000/api/v1/generate-groovy", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({requirement})
+        body: JSON.stringify({prompt}),
+        signal: controller.signal
     });
-
+    
     if (!response.ok) {
         throw new Error(`Error: ${response.statusText}`);
     }
@@ -37,10 +41,22 @@ try {
         statusEl.textContent = "Groovy code generated successfully!";
         outputSection.classList.remove("hidden");
 
+    } else {
+        extractedGroovyCode = "";
+        codePreview.textContent = "No Groovy code found in the response.";
+        outputSection.style.display = "block";
+        statusEl.textContent = "No Groovy code found in the response.";
     }
-}catch (error) {
-        statusEl.textContent = "Connection error: Make sure FASTApi is running and accessible.";
+} catch (error) {
+    if (error.name === "AbortError") {
+        statusEl.textContent = "The API did not respond within 30 seconds. Please try again.";
+        return;
     }
+
+    statusEl.textContent = "Connection error: Make sure FASTApi is running and accessible.";
+} finally {
+    clearTimeout(timeoutId);
+}
 }
 );
 

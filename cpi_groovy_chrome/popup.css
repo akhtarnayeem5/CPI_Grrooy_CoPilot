@@ -54,18 +54,18 @@ button{
 button:hover{
     background-color: #0056b3;
 }
-.primary-button{
-    background-color: #28a745;
+.primary-btn{
+    background-color: #2f322f;
 }
 .toolbar{
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
 }
-.secondary-button{
+.secondary-btn{
     background-color: #6c757d;
 }
-.accept-button{
+.accept-btn{
     background-color: #28a745;
 }
 .status{

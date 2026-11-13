@@ -11,14 +11,14 @@
     </div>
     <label for="requirement">Describe your requirement:</label>
     <textarea id="requirement" placeholder="Enter your requirement here..."></textarea>
-    <button id="generateButton" class="primary-btn">Generate Groovy Script</button>
+    <button id="generateBtn" class="primary-btn">Generate Groovy Script</button>
     <div id="status" class="status"></div>
     <div id="outputSection" class="hidden">
-        <div class=""toolbar">
-            <button id="copyButton" class="secondary-btn">Copy Groovy only</button>
-            <button id="injectButton" class="accent-btn">inject into CPI editor</button>
+        <div class="toolbar">
+            <button id="copyBtn" class="secondary-btn">Copy Groovy only</button>
+            <button id="injectBtn" class="accent-btn">inject into CPI editor</button>
         </div>
-        <pre id="preview" class="output"></pre>
+        <pre id="codePreview" class="output"></pre>
     </div>
     <script src="popup.js"></script>
 </body>
